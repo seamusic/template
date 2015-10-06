@@ -1,40 +1,58 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <!-- Global stylesheets -->
+    @Styles.Render("~/Content/css/base")
+    <!-- /global stylesheets -->
+    @RenderSection("style", required: false)
+    <!-- Core JS files -->
+    @Scripts.Render("~/Scripts/core")
+    <!-- /core JS files -->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- Main navbar -->
+<div class="navbar navbar-default header-highlight">
+    @Html.Partial("_Navbar")
+</div>
+    <!-- /main navbar -->
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main">
+                @Html.Partial("_Sidebar")                
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+            <!-- /main sidebar -->
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Content area -->
+                <div class="content">
+                    <!-- Dashboard content -->
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                    <!-- /dashboard content -->
+                    <!-- Footer -->
+                    @Html.Partial("_Footer")
+                    <!-- /footer -->
+                </div>
+                <!-- /content area -->
             </div>
+            <!-- /main content -->
         </div>
+        <!-- /page content -->
     </div>
+    <!-- /page container -->
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+@Scripts.Render("~/Scripts/theme")
+<script type="text/javascript" src="~/Scripts/core/app.js"></script>
+<script type="text/javascript" src="~/Scripts/pages/dashboard.js"></script>
+@RenderSection("scripts", required: false)
 </body>
 </html>
